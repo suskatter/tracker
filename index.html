@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f7f7f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #333;
+}
+
+/* Container Styling */
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
+
+/* Title Styling */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Habit Form Styling */
+.habit-form {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.habit-form input {
+    padding: 12px;
+    margin-right: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.habit-form button {
+    padding: 12px 20px;
+    background-color: #3b8dbd;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.habit-form button:hover {
+    background-color: #2a6a8c;
+}
+
+/* Habit List Styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Buttons within list items */
+button.complete-btn, button.delete-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+button.complete-btn {
+    background-color: #28a745;
+}
+
+button.complete-btn:hover {
+    background-color: #218838;
+}
+
+button.delete-btn {
+    background-color: #dc3545;
+}
+
+button.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Stats Section Styling */
+.stats {
+    margin-top: 20px;
+}
+
+.stats h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.stats p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.stats span {
+    font-weight: bold;
+}
+    </style>
+    <script>
+        // Register the service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                .then((registration) => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch((error) => {
+                    console.error('Service Worker registration failed:', error);
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Habit Tracker</h1>
+        <div class="habit-form">
+            <input type="text" id="habitInput" placeholder="Enter a new habit">
+            <button onclick="addHabit()">Add Habit</button>
+        </div>
+        <ul id="habitList"></ul>
+        <div class="stats">
+            <h2>Your Stats</h2>
+            <p>Total Habits: <span id="totalHabits">0</span></p>
+            <p>Total Streaks: <span id="totalStreaks">0</span></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
